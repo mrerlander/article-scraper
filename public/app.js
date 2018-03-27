@@ -102,7 +102,7 @@ $(document).on("click", ".save", function (event) {
 
     if (saved === "true") {
         $.get("/save/" + id + "/" + saved, function (data) {
-            console.log(data.saved)
+            
             clicked.find("i").text("cloud");
             clicked.attr("data-saved", data.saved);
         });
