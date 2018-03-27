@@ -1,0 +1,27 @@
+.card.small .card-image, .card.medium .card-image, .card.large .card-image {
+    overflow: visible;
+}
+
+.card .card-action {
+    max-height: 30%;
+}
+
+.card.small .card-image+.card-content, .card.medium .card-image+.card-content, .card.large .card-image+.card-content {
+    max-height: 70%;
+}
+.card .card-title {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.card-com {
+    line-height: 2.5;
+}
+
+body {
+    background: url("./images/Music-Studio.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
