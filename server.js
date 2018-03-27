@@ -16,7 +16,7 @@ app.use(
 
 app.use(express.static("public"));
 
-var databaseUrl = "articlescraper";
+var databaseUrl = process.env.MONGODB_URI || "mongodb://localhost/articlescraper";
 var collections = ["articles"];
 
 var db = mongojs(databaseUrl, collections);
@@ -144,7 +144,8 @@ app.post("/delcom", function (req, res) {
                 $pull: {
                     "comments": comment,
                 }
-            }
+            },
+            new: true
         },
         function (err, doc, lastErrorObject) {
             db.articles.find().sort({
