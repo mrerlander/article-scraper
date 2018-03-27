@@ -145,7 +145,7 @@ app.post("/delcom", function (req, res) {
                     "comments": comment,
                 }
             },
-            new: true
+            new: false
         },
         function (err, doc, lastErrorObject) {
             db.articles.find().sort({
