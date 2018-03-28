@@ -61,7 +61,6 @@ app.get("/scrape", function (req, res) {
             db.articles.find({
                 "link": link
             }, function (err, doc) {
-                console.log(doc.length);
                 if (doc.length === 0) {
                     db.articles.insert(article)
                 }
