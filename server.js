@@ -34,7 +34,7 @@ app.get("/", function(req, res){
 })
 
 app.get("/scrape", function (req, res) {
-    request("https://pitchfork.com/news/", function (error, response, html) {
+    request("https://pitchfork.com/latest/", function (error, response, html) {
 
         var $ = cheerio.load(html);
 

@@ -3,12 +3,17 @@
 }
 
 .card .card-action {
-    max-height: 30%;
+    max-height: 10%;
+}
+
+.card img{
+    max-height: 250px;
 }
 
 .card.small .card-image+.card-content, .card.medium .card-image+.card-content, .card.large .card-image+.card-content {
-    max-height: 70%;
+    max-height: 90%;
 }
+
 .card .card-title {
     font-size: inherit;
     font-weight: inherit;
