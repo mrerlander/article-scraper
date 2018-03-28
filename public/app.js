@@ -1,8 +1,12 @@
 $(document).ready(function () {
     $('.sidenav').sidenav();
-    $('.parallax').parallax();
-    $.get("/scrape", function (data) {
+    $.get("/", function (data) {
+
+        if (data.length === 0){
         displayhtml(data);
+        } else {
+            $("#articles").html("<h2 class='card-panel teal black-text'>Looks like there are no articles yet.</h2>")
+        }
     });
 });
 

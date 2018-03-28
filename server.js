@@ -25,6 +25,14 @@ db.on("error", function (error) {
     console.log("Database Error:", error);
 });
 
+app.get("/", function(req, res){
+    db.articles.find().sort({
+        "time": -1
+    }, function (err, docs) {
+        res.json(docs);
+    });
+})
+
 app.get("/scrape", function (req, res) {
     request("https://pitchfork.com/news/", function (error, response, html) {
 
@@ -53,9 +61,8 @@ app.get("/scrape", function (req, res) {
             db.articles.find({
                 "title": title
             }, function (err, doc) {
-                if (doc.length > 0) {
-                    return
-                } else {
+                console.log(doc.length);
+                if (doc.length === 0) {
                     db.articles.insert(article)
                 }
             });
