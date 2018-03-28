@@ -1,12 +1,7 @@
 $(document).ready(function () {
     $('.sidenav').sidenav();
-    $.get("/", function (data) {
-
-        if (data.length === 0){
+    $.get("/scrape", function(data){
         displayhtml(data);
-        } else {
-            $("#articles").html("<h2 class='card-panel teal black-text'>Looks like there are no articles yet.</h2>")
-        }
     });
 });
 

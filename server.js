@@ -59,7 +59,7 @@ app.get("/scrape", function (req, res) {
             };
 
             db.articles.find({
-                "title": title
+                "link": link
             }, function (err, doc) {
                 console.log(doc.length);
                 if (doc.length === 0) {
