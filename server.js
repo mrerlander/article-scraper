@@ -27,7 +27,7 @@ db.on("error", function (error) {
 
 app.get("/", function(req, res){
     db.articles.find().sort({
-        "time": -1
+        "_id": -1
     }, function (err, docs) {
         res.json(docs);
     });
@@ -68,7 +68,7 @@ app.get("/scrape", function (req, res) {
         });
 
         db.articles.find().sort({
-            "time": -1
+            "_id": -1
         }, function (err, docs) {
             res.json(docs);
         });
@@ -106,7 +106,7 @@ app.get("/saved", function (req, res) {
     db.articles.find({
         "saved": true
     }).sort({
-        "time": -1
+        "_id": -1
     }, function (err, docs) {
         res.json(docs);
     });
@@ -129,7 +129,7 @@ app.post("/comment", function (req, res) {
         },
         function (err, doc, lastErrorObject) {
             db.articles.find().sort({
-                "time": -1
+                "_id": -1
             }, function (err, docs) {
                 res.json(docs);
             });
@@ -155,7 +155,7 @@ app.post("/delcom", function (req, res) {
         },
         function (err, doc, lastErrorObject) {
             db.articles.find().sort({
-                "time": -1
+                "_id": -1
             }, function (err, docs) {
                 res.json(docs);
             });

@@ -18,7 +18,7 @@ function displayhtml(data) {
         var articleImg = $("<div>");
         $(articleImg).addClass("card-image");
         $(articleImg).append("<img src='" + element.img + "'>");
-        $(articleImg).append("<a class='btn-floating halfway-fab waves-effect modal-trigger waves-light red' href='#modal" + element._id + "'><i class='large material-icons'>mode_edit</i></a>");
+        $(articleImg).append("<a class='btn-floating halfway-fab waves-effect modal-trigger waves-light red open-modal' href='#modal' data-id='" + element._id + "'><i class='large material-icons'>mode_edit</i></a>");
         $(articleCard).append(articleImg);
 
         var cardContent = $("<div>");
@@ -57,30 +57,29 @@ function displayhtml(data) {
 
         $(newArticle).append(articleCard);
 
-        var modal = $("<div>");
-        $(modal).attr("id", "modal" + element._id);
-        $(modal).attr("data-id", element._id);
-        $(modal).addClass("modal");
-
-        var modalContent = $("<div>");
-        $(modalContent).append("<form data-id='" + element._id + "'>" +
-            "<div class='input-field col s12'><textarea id='comment" + element._id + "' class='materialize-textarea'></textarea>" +
-            "<label for='comment'>Type Comment Here</label></div>" +
-            "<button type='submit' class='waves-effect waves-light modal-close btn add-comment' name='action'>Comment</button>" +
-            "</form>");
-
-        $(modal).append(modalContent);
-
-        var modalFooter = $("<div>");
-        $(modalFooter).addClass("modal-footer")
-        $(modalFooter).append("<a class='modal-action modal-close waves-effect waves-green btn-flat'>Close</a>");
-
-        $(modal).append(modalFooter);
-
-        $(newArticle).append(modal);
-
-        $("#articles").append(newArticle);
+       $("#articles").append(newArticle);
+       
     });
+
+    var modal = $("<div>");
+    $(modal).attr("id", "modal");
+    $(modal).addClass("modal");
+
+    var modalContent = $("<div>");
+    $(modalContent).append("<form id='comment-modal'>" +
+        "<div class='input-field col s12'><textarea id='comment' class='materialize-textarea'></textarea>" +
+        "<label for='comment'>Type Comment Here</label></div>" +
+        "<button type='submit' class='waves-effect waves-light modal-close btn add-comment' name='action'>Comment</button>" +
+        "</form>");
+
+    $(modal).append(modalContent);
+
+    var modalFooter = $("<div>");
+    $(modalFooter).addClass("modal-footer")
+    $(modalFooter).append("<a class='modal-action modal-close waves-effect waves-green btn-flat'>Close</a>");
+
+    $(modal).append(modalFooter);
+    $("#articles").append(modal);
     $('.modal').modal();
 }
 
@@ -113,11 +112,12 @@ $(document).on("click", ".save", function (event) {
     }
 });
 
-$(document).on("click", ".comment", function (event) {
+$(document).on("click", ".open-modal", function (event) {
     event.preventDefault();
 
     var clicked = $(this);
-    var id = clicked.attr("data-id");
+    var formID = clicked.attr("data-id");
+    $("#comment-modal").attr("data-id", formID);
 });
 
 
@@ -129,11 +129,11 @@ $(document).on("click", "#saved-articles", function (event) {
     });
 });
 
-$(document).on("submit", "form", function(event){
+$(document).on("submit", "#comment-modal", function(event){
     event.preventDefault();
     
     var id = $(this).attr("data-id");
-    var comment = $("#comment" + id).val();
+    var comment = $("#comment").val();
     
     $.post("/comment", {id: id, comment: comment}, function(data){
         displayhtml(data);
